@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EditWithCrazyBoy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
+    header {
+      background-color: #1e1e1e;
+      padding: 40px 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #00ffd9;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+    .section {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .section h2 {
+      font-size: 2rem;
+      color: #00ffd9;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    video, img {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .services ul {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+    }
+    .services li {
+      background: #222;
+      padding: 12px 20px;
+      margin: 10px auto;
+      border-radius: 8px;
+      max-width: 400px;
+    }
+    .contact {
+      text-align: center;
+    }
+    .contact a, .contact p {
+      display: block;
+      margin: 10px 0;
+      color: #00ffd9;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .whatsapp-float, .call-float {
+      position: fixed;
+      bottom: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      color: white;
+      font-size: 26px;
+      text-align: center;
+      line-height: 60px;
+      z-index: 999;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+    .whatsapp-float {
+      background: #25D366;
+      right: 90px;
+    }
+    .call-float {
+      background: #ff4757;
+      right: 20px;
+    }
+    .whatsapp-float:hover, .call-float:hover {
+      opacity: 0.9;
+    }
+    footer {
+      background: #1a1a1a;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #111;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00ffd9;
+      font-size: 24px;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin: 10px;
+      flex: 1 1 250px;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .testimonial-slider {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 20px;
+      padding: 20px 0;
+    }
+    .testimonial-slider .glass-card {
+      scroll-snap-align: start;
+      min-width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div id="loader">Loading...</div>
+  <script>
+    window.addEventListener("load", () => {
+      document.getElementById("loader").style.display = "none";
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const phrases = ["Video Editor", "Designer", "Creator"];
+      let i = 0;
+      const typeBox = document.getElementById("typedText");
+
+      function loop() {
+        typeBox.textContent = phrases[i];
+        i = (i + 1) % phrases.length;
+        setTimeout(loop, 1500);
+      }
+      loop();
+    });
+
+    const counters = {
+      videos: 500,
+      clients: 100,
+      years: 5
+    };
+
+    window.addEventListener('scroll', () => {
+      for (let id in counters) {
+        let el = document.getElementById(id);
+        if (el && !el.dataset.counted && el.getBoundingClientRect().top < window.innerHeight) {
+          el.dataset.counted = true;
+          let start = 0;
+          const end = counters[id];
+          const duration = 1000;
+          const step = Math.ceil(end / (duration / 20));
+          const interval = setInterval(() => {
+            start += step;
+            if (start >= end) {
+              el.textContent = end + '+';
+              clearInterval(interval);
+            } else {
+              el.textContent = start + '+';
+            }
+          }, 20);
+        }
+      }
+
+      document.querySelectorAll('.fade-in').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 50) {
+          el.classList.add('visible');
+        }
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("year").textContent = new Date().getFullYear();
+    });
+  </script>
+
+  <header>
+    <h1>EditWithCrazyBoy</h1>
+    <p><span id="typedText" style="color:#00ffd9; font-weight:bold;"></span></p>
+  </header>
+
+  <!-- Rest of content remains same -->
+
+  <section class="section fade-in">
+    <h2>🌟 More Client Love</h2>
+    <div class="testimonial-slider">
+      <div class="glass-card">“Best video editor I've worked with! 🔥” — Riya</div>
+      <div class="glass-card">“Turnaround time is amazing. Highly recommended!” — Mohit</div>
+      <div class="glass-card">“Every reel hits hard. Thank you CrazyBoy!” — Tanvi</div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; <span id="year"></span> EditWithCrazyBoy. All rights reserved.
+  </footer>
+</body>
+</html>
